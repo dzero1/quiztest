@@ -24,25 +24,26 @@ cssClasses: Array<String> = [];
 cssClasses2: Array<String> = [];
 lodding=true;
 
-tmpQuiz
+count = 0;
   constructor(private route: ActivatedRoute,
               private router: Router,private pouchDBService: PouchDBService,
               private changeDetectorRef: ChangeDetectorRef
   ) {
               pouchDBService.databaseName='quiztest';
               pouchDBService.init();
+              setInterval(()=>{
+                this.count++;
+                if (this.count > 10000) this.count = 0;
+              }, 1000)
               this.pouchDBService.getChangeListener().subscribe(data => {
                   for (let i = 0; i < data.change.docs.length; i++) {
                      if(data.change.docs[i]._id=="questions"){
-                       this.tmpQuiz=data.change.docs[i].question; 
-                        if(this.tmpQuiz.length==0){
+                       this.questions=data.change.docs[i].question; 
+                        if(this.questions.length==0){
                           this.lodding=true;
                         } else{
                           this.lodding=false;
                         }
-                        setTimeout(()=>{
-                          this.questions = this.tmpQuiz;
-                        })
                       }
                   }
               });
