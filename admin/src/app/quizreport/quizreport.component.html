@@ -1,17 +1,36 @@
-<md-card class="card-component components-margin">
-          <canvas baseChart
-                  [datasets]="goalChartData"
+<table width="100%">
+  <tr>
+    <td width="50%">
+      <md-card class="card-component components-margin">
+                <canvas baseChart
+                        [datasets]="goalChartData"
+                        [labels]="goalChartLabels"
+                        [chartType]="goalChartType"
+                        [colors]="goalChartColors"
+                        [options]="goalChartOptions"
+                        [legend]="goalChartLegend">
+                </canvas>
+                <!--<canvas baseChart
+                  class="chart"
+                  [data]="goalChartData"
                   [labels]="goalChartLabels"
-                  [chartType]="goalChartType"
-                  [colors]="goalChartColors"
                   [options]="goalChartOptions"
-                  [legend]="goalChartLegend">
-          </canvas>
-          <!--<canvas baseChart
-            class="chart"
-            [data]="goalChartData"
-            [labels]="goalChartLabels"
-            [options]="goalChartOptions"
-            [chartType]="'goalChartType'">
-          </canvas>-->
-</md-card>
+                  [chartType]="'goalChartType'">
+                </canvas>-->
+      </md-card>
+    </td>
+    <td width="50%">
+        <md-card>
+          <md-card-title>
+            {{totCorrect}}% are correct
+          </md-card-title>
+          <div  *ngFor="let data of records; let i=index">
+              <md-card-content>
+                {{data.doc._id}}
+                {{data.doc.ansid}}
+              </md-card-content>
+          </div>
+      </md-card>
+    </td>
+  </tr>
+</table>
