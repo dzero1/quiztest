@@ -12,6 +12,8 @@ import { QuizcreatorComponent } from './quizcreator/quizcreator.component';
 import { PouchDBService } from './pouch-dbservice.service'
 import { QuizreportComponent } from './quizreport/quizreport.component';
 
+import { ChartsModule } from 'ng2-charts/ng2-charts';
+
 const appRoutes: Routes = [
   {
     path: 'quizcreator',
@@ -19,6 +21,7 @@ const appRoutes: Routes = [
     pathMatch: 'full',
     data: { title: 'quizcreator' }
   },
+  {path: 'report' , component: QuizreportComponent},
   //{ path: 'schoolpage/:school', component: SchoolpageComponent },
 ];
 
@@ -34,6 +37,7 @@ const appRoutes: Routes = [
     MaterialModule,
     BrowserAnimationsModule,
     NoopAnimationsModule,
+    ChartsModule,
   ],
   providers: [PouchDBService],
   bootstrap: [AppComponent]
