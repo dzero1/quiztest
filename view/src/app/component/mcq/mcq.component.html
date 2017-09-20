@@ -12,9 +12,6 @@
       <md-card class="question-header">
         <md-card class="question-header-inner">
           {{question.title}}
-            <div *ngIf="question.optional" class="question-header-inner2">
-              <div *ngFor="let opt of question.optional; let i = index;"> <p>{{opt.text}}<p></div>
-            </div>
         </md-card>
       </md-card>
       <div *ngFor="let ans of question.answer; let i = index;">

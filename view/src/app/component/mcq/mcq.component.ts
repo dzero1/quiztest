@@ -7,7 +7,6 @@ import { MdCheckboxModule, MdCheckbox } from '@angular/material';
   selector: 'app-mcq',
   templateUrl: './mcq.component.html',
   styleUrls: ['./mcq.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
 })
 export class McqComponent implements OnInit {
    @ViewChildren('options') options: QueryList<MdCheckboxModule>;
@@ -24,6 +23,8 @@ review: boolean = false;
 cssClasses: Array<String> = [];
 cssClasses2: Array<String> = [];
 lodding=true;
+
+tmpQuiz
   constructor(private route: ActivatedRoute,
               private router: Router,private pouchDBService: PouchDBService,
               private changeDetectorRef: ChangeDetectorRef
@@ -33,13 +34,15 @@ lodding=true;
               this.pouchDBService.getChangeListener().subscribe(data => {
                   for (let i = 0; i < data.change.docs.length; i++) {
                      if(data.change.docs[i]._id=="questions"){
-                       this.questions=data.change.docs[i].question; 
-                        if(this.questions.length==0){
+                       this.tmpQuiz=data.change.docs[i].question; 
+                        if(this.tmpQuiz.length==0){
                           this.lodding=true;
-                        }else{
-                            this.lodding=false;
+                        } else{
+                          this.lodding=false;
                         }
-                        this.changeDetectorRef.markForCheck();
+                        setTimeout(()=>{
+                          this.questions = this.tmpQuiz;
+                        })
                       }
                   }
               });
@@ -108,5 +111,8 @@ lodding=true;
        
       }
     });
+
+    this.questions= false;
+    this.lodding=true;
   }
 }
