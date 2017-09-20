@@ -8,7 +8,7 @@
             </md-form-field>
         </td>
       </tr>
-  
+
       <tr>
        <td>
           <md-radio-button #rd1 (click)="radioChange(1)" [checked]="true" value="1"></md-radio-button>
@@ -41,10 +41,12 @@
           </md-form-field>
         </td>
       </tr>
-  
+
     </table>
   </form>
-  <button md-raised-button color="warn" (click)="addQuiz()">Add</button>
+  <div class="footer-btn">
+  <button md-raised-button color="warn" (click)="addQuiz()" class="add-btn">Add</button>
+  </div>
   <br>
   <br>
   <md-list>
