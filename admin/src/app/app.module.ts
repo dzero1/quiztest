@@ -10,6 +10,7 @@ import 'hammerjs';
 
 import { QuizcreatorComponent } from './quizcreator/quizcreator.component';
 import { QuizreportComponent } from './quizreport/quizreport.component';
+import {AddquizDialogComponent} from './quizcreator/addquiz-dialog/addquiz-dialog.component';
 
 const appRoutes: Routes = [
   {
@@ -17,15 +18,15 @@ const appRoutes: Routes = [
     component: QuizcreatorComponent,
     pathMatch: 'full',
     data: { title: 'quizcreator' }
-  },
-  //{ path: 'schoolpage/:school', component: SchoolpageComponent },
+  }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     QuizcreatorComponent,
-    QuizreportComponent
+    QuizreportComponent,
+    AddquizDialogComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
@@ -35,6 +36,7 @@ const appRoutes: Routes = [
     NoopAnimationsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [AddquizDialogComponent]
 })
 export class AppModule { }
