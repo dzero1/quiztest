@@ -1,0 +1,10 @@
+<div>
+  User Name<p>{{username}}</p>
+
+  <div *ngFor="let question of questions" >
+    <p>{{question.title}}
+    </p> 
+    <p *ngFor="let a of question.answer">{{a.text}}
+    </p>
+  </div>
+</div> 
