@@ -15,7 +15,7 @@ export class AppComponent {
 
   openDialog() {
     let dialogRef = this.dialog.open(AddquizDialogComponent, {
-      width: '250px',
+      width: '50%',
       data: {}
     });
 
