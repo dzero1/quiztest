@@ -9,6 +9,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import 'hammerjs';
 
 import { QuizcreatorComponent } from './quizcreator/quizcreator.component';
+import { PouchDBService } from './pouch-dbservice.service'
 import { QuizreportComponent } from './quizreport/quizreport.component';
 
 const appRoutes: Routes = [
@@ -34,7 +35,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     NoopAnimationsModule,
   ],
-  providers: [],
+  providers: [PouchDBService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
