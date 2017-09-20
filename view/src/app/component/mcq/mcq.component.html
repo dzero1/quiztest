@@ -1,5 +1,5 @@
 <div>
-  User Name<p>{{username}}</p>
+ <div class="username-bar"> <p>User Name:</p> <p class="user-name">{{username}}</p> </div>
   <div *ngIf="lodding">
     lodding
   </div>
@@ -21,7 +21,7 @@
             <tr>
               <td width="10%" align="center">
                 <md-checkbox class="answers" id="qanswers{{i+1}}" #options [ngClass]="cssClass(i)"
-                        [disableRipple]="true" 
+                        [disableRipple]="true"
                         [checked]="ans.checked"
                         (change)="doChange($event)" value="{{i+1}}">
                 </md-checkbox>
