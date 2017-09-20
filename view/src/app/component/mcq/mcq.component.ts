@@ -1,11 +1,13 @@
-import { Component, OnInit, Input,ViewChildren,QueryList} from '@angular/core';
+import { Component, OnInit, Input,ViewChildren,QueryList,
+  ChangeDetectionStrategy, ChangeDetectorRef} from '@angular/core';
 import {Router, ActivatedRoute, Params} from '@angular/router';
 import { PouchDBService } from '../../pouch-dbservice.service';
 import { MdCheckboxModule, MdCheckbox } from '@angular/material';
 @Component({
   selector: 'app-mcq',
   templateUrl: './mcq.component.html',
-  styleUrls: ['./mcq.component.scss']
+  styleUrls: ['./mcq.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class McqComponent implements OnInit {
    @ViewChildren('options') options: QueryList<MdCheckboxModule>;
@@ -23,7 +25,9 @@ cssClasses: Array<String> = [];
 cssClasses2: Array<String> = [];
 lodding=true;
   constructor(private route: ActivatedRoute,
-              private router: Router,private pouchDBService: PouchDBService) {
+              private router: Router,private pouchDBService: PouchDBService,
+              private changeDetectorRef: ChangeDetectorRef
+  ) {
               pouchDBService.databaseName='quiztest';
               pouchDBService.init();
               this.pouchDBService.getChangeListener().subscribe(data => {
@@ -31,10 +35,11 @@ lodding=true;
                      if(data.change.docs[i]._id=="questions"){
                        this.questions=data.change.docs[i].question; 
                         if(this.questions.length==0){
-                            this.lodding=true;
-                          }else{
-                              this.lodding=false;
-                          }
+                          this.lodding=true;
+                        }else{
+                            this.lodding=false;
+                        }
+                        this.changeDetectorRef.markForCheck();
                       }
                   }
               });
