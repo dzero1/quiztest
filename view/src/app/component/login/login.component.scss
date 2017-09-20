@@ -1,0 +1,26 @@
+.login-page {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  background-color: #5B8EFB;
+  margin: -8px;
+
+  /deep/ .mat-form-field {
+    width: 100%;
+  }
+
+  .login-card {
+    width: 30%;
+    margin: 18% auto;
+    .login-btn {
+      width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .login-card {
+    width: 85% !important;
+    margin: 35% auto !important;
+  }
+}

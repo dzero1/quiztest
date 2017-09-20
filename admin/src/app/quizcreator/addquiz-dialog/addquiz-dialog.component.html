@@ -1,0 +1,53 @@
+<div class="host">
+    <form class="example-form">
+      <table class="example-full-width" cellspacing="0">
+        <tr>
+          <td>
+            <md-form-field class="example-full-width" style="width: 100%;">
+              <input #title mdInput placeholder="Question" value="{{c_title}}">
+              </md-form-field>
+          </td>
+        </tr>
+    
+        <tr>
+         <td>
+            <md-radio-button #rd1 (click)="radioChange(1)" [checked]="true" value="1"></md-radio-button>
+            <md-form-field class="example-full-width">
+            <input #ans1 mdInput placeholder="Answer 1" value="{{c_ans1}}">
+          </md-form-field>
+        </td>
+        </tr>
+        <tr>
+          <td>
+              <md-radio-button #rd2 (click)="radioChange(2)" value="2"></md-radio-button>
+              <md-form-field class="example-full-width">
+              <input #ans2 mdInput placeholder="Answer 2" value="{{c_ans2}}">
+            </md-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+              <md-radio-button #rd3 (click)="radioChange(3)" value="3"></md-radio-button>
+              <md-form-field class="example-full-width">
+              <input #ans3 mdInput placeholder="Answer 3" value="{{c_ans3}}">
+            </md-form-field>
+          </td>
+        </tr>
+        <tr>
+            <td>
+              <md-radio-button #rd4 (click)="radioChange(4)" value="4"></md-radio-button>
+                <md-form-field class="example-full-width">
+              <input #ans4 mdInput placeholder="Answer 4" value="{{c_ans4}}">
+            </md-form-field>
+          </td>
+        </tr>
+    
+      </table>
+    </form>
+    <button md-raised-button color="warn" (click)="addQuiz()">Add</button>
+    <br>
+    <br>
+    <md-list>
+        <md-list-item *ngFor="let quiz of allQuestions">{{quiz.qid}} {{quiz.title}}</md-list-item>
+    </md-list>
+  </div>
