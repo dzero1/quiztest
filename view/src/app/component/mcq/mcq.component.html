@@ -1,11 +1,13 @@
 <div>
  <div class="username-bar"> <p>User Name:</p> <p class="user-name">{{username}}</p> </div>
-  <div *ngIf="lodding">
-    lodding
+  <div  *ngIf="lodding">
+    <md-spinner class="loading-spi"></md-spinner>
+    <p class="wait-p">Waiting for Teacher...</p>
   </div>
-  <div  *ngIf="questions">
 
-<div id="dragDropMainDiv" class='wrapper' *ngFor="let question of questions"  >
+  <div   *ngIf="questions">
+
+<div  id="dragDropMainDiv" class='wrapper' *ngFor="let question of questions"  >
     <div class="questions">
       <md-card class="question-header">
         <md-card class="question-header-inner">
