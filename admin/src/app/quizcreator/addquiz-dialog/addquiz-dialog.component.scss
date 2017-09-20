@@ -1,13 +1,18 @@
 .host{
-    padding: 30px;
+    padding: 5px 0px;
 }
 
 .example-form {
-    min-width: 150px;
-    max-width: 500px;
     width: 100%;
 }
 
 .example-full-width {
-    width: 80%;
+    width: 100%;
+}
+
+.footer-btn{
+  text-align: center;
+  .add-btn{
+    width: 65%;
+  }
 }

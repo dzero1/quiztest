@@ -1,10 +1,49 @@
 <div>
   User Name<p>{{username}}</p>
-
-  <div *ngFor="let question of questions" >
-    <p>{{question.title}}
-    </p> 
-    <p *ngFor="let a of question.answer">{{a.text}}
-    </p>
+  <div *ngIf="lodding">
+    lodding
   </div>
-</div> 
+  <div  *ngIf="questions">
+
+<div id="dragDropMainDiv" class='wrapper' *ngFor="let question of questions"  >
+    <div class="questions">
+      <md-card class="question-header">
+        <md-card class="question-header-inner">
+          {{question.title}}
+            <div *ngIf="question.optional" class="question-header-inner2">
+              <div *ngFor="let opt of question.optional; let i = index;"> <p>{{opt.text}}<p></div>
+            </div>
+        </md-card>
+      </md-card>
+      <div *ngFor="let ans of question.answer; let i = index;">
+        <md-card id="card{{i+1}}" class="question-answers" [ngClass]="cssClass2(i)" (click)="clickCard(i+1)">
+          <table width="100%">
+            <tr>
+              <td width="10%" align="center">
+                <md-checkbox class="answers" id="qanswers{{i+1}}" #options [ngClass]="cssClass(i)"
+                        [disableRipple]="true" 
+                        [checked]="ans.checked"
+                        (change)="doChange($event)" value="{{i+1}}">
+                </md-checkbox>
+              </td>
+              <td width="90%">
+                <md-card class="question-answers-inner">
+                  <table width="100%">
+                    <tr>
+                      <td width="5%" align="center">
+                        {{i+1}}.
+                      </td>
+                      <td width="95%">
+                        {{ans.text}}
+                      </td>
+                    </tr>
+                  </table>
+                </md-card>
+              </td>
+            </tr>
+          </table>
+        </md-card>
+      </div>
+    </div>
+  </div>
+</div>
