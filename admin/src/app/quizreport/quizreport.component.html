@@ -1,3 +1,17 @@
-<p>
-  quizreport works!
-</p>
+<md-card class="card-component components-margin">
+          <canvas baseChart
+                  [datasets]="goalChartData"
+                  [labels]="goalChartLabels"
+                  [chartType]="goalChartType"
+                  [colors]="goalChartColors"
+                  [options]="goalChartOptions"
+                  [legend]="goalChartLegend">
+          </canvas>
+          <!--<canvas baseChart
+            class="chart"
+            [data]="goalChartData"
+            [labels]="goalChartLabels"
+            [options]="goalChartOptions"
+            [chartType]="'goalChartType'">
+          </canvas>-->
+</md-card>
