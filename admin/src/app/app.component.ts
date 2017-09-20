@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {MdDialog, MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 import {AddquizDialogComponent} from './quizcreator/addquiz-dialog/addquiz-dialog.component';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,9 @@ import {AddquizDialogComponent} from './quizcreator/addquiz-dialog/addquiz-dialo
 export class AppComponent {
   title = 'app';
 
-  constructor(public dialog: MdDialog) {
+  constructor(public dialog: MdDialog,
+    private route: ActivatedRoute,
+    private router: Router) {
   }
 
   openDialog() {
@@ -21,6 +24,9 @@ export class AppComponent {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
+      if (result){
+        this.router.navigate(['report']);
+      }
     });
   }
 }

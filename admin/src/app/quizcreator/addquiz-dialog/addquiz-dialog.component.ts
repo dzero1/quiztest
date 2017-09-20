@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild,ElementRef } from '@angular/core';
 import { PouchDBService } from '../../pouch-dbservice.service'
-import { MdInput, MdRadioButton, MdRadioModule } from '@angular/material'
+import { MdDialogRef, MdInput, MdRadioButton, MdRadioModule } from '@angular/material'
 
 @Component({
   selector: 'app-addquiz-dialog',
@@ -27,7 +27,8 @@ export class AddquizDialogComponent implements OnInit {
 
   doc:string = "questions";
 
-  constructor(private pdb:PouchDBService) { 
+  constructor(public dialogRef: MdDialogRef<AddquizDialogComponent>,
+    private pdb:PouchDBService) { 
     pdb.databaseName = "quiztest";
     pdb.init();
   }
@@ -64,12 +65,16 @@ export class AddquizDialogComponent implements OnInit {
 
     this.pdb.get(this.doc).then((questions:any)=>{
       questions.question = [q];
-      console.log(questions.question);      
-      this.pdb.put(this.doc, questions);
+      this.putDoc(questions);
     }).catch(error=>{
-      this.pdb.put(this.doc, {"question":[q]});
+      this.putDoc({"question":[q]});
     });
+  }
 
+  putDoc(q){
+    this.pdb.put(this.doc, q).then(()=>{
+      this.dialogRef.close(true);
+    });
   }
 
   radioChange(k){
