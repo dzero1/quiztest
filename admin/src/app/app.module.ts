@@ -9,6 +9,7 @@ import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform
 import 'hammerjs';
 
 import { QuizcreatorComponent } from './quizcreator/quizcreator.component';
+import { QuizreportComponent } from './quizreport/quizreport.component';
 
 const appRoutes: Routes = [
   {
@@ -23,7 +24,8 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    QuizcreatorComponent
+    QuizcreatorComponent,
+    QuizreportComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
