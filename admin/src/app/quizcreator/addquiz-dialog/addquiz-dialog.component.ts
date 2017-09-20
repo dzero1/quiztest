@@ -17,6 +17,12 @@ export class AddquizDialogComponent implements OnInit {
 
   correctAnswer:number = 1;
 
+  c_title="";
+  c_ans1="";
+  c_ans2="";
+  c_ans3="";
+  c_ans4="";
+
   allQuestions:Array<any> = [];
 
   doc:string = "questions";
@@ -29,6 +35,12 @@ export class AddquizDialogComponent implements OnInit {
   ngOnInit() {
     this.pdb.get(this.doc).then((questions:any)=>{
       this.allQuestions = questions.question;
+      let q = this.allQuestions[0];
+      this.c_title = q.title;
+      this.c_ans1 = q.answer[0].text;
+      this.c_ans2 = q.answer[1].text;
+      this.c_ans3 = q.answer[2].text;
+      this.c_ans4 = q.answer[3].text;
       console.log(questions.question);      
     })
   }
