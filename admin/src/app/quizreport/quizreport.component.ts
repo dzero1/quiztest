@@ -39,7 +39,7 @@ export class QuizreportComponent implements OnInit {
       console.log(data);
       for (let i = 0; i < data.rows.length; i++) {
         console.log("document"+i);
-        if(data.rows[i]._id=="answer" || data.rows[i]._id=="questions"){
+        if(data.rows[i].id=="answer" || data.rows[i].id=="questions"){
           continue;
         }else{
           this.records.push(data.rows[i].doc);
@@ -75,7 +75,7 @@ export class QuizreportComponent implements OnInit {
               console.log(data);
               for (let i = 0; i < data.rows.length; i++) {
                 console.log("documentasasasasa"+i);
-                if(data.rows[i]._id=="answer" || data.rows[i]._id=="questions"){
+                if(data.rows[i].id=="answer" || data.rows[i].id=="questions"){
                   continue;
                 }else{
                   this.records.push(data.rows[i].doc);
