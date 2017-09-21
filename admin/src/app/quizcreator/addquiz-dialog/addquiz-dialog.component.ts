@@ -28,7 +28,7 @@ export class AddquizDialogComponent implements OnInit {
   doc:string = "questions";
 
   constructor(public dialogRef: MdDialogRef<AddquizDialogComponent>,
-    private pdb:PouchDBService) { 
+    private pdb:PouchDBService) {
     pdb.databaseName = "quiztest";
     pdb.init();
   }
@@ -42,7 +42,7 @@ export class AddquizDialogComponent implements OnInit {
       this.c_ans2 = q.answer[1].text;
       this.c_ans3 = q.answer[2].text;
       this.c_ans4 = q.answer[3].text;
-      console.log(questions.question);      
+      console.log(questions.question);
     })
   }
 
@@ -80,6 +80,10 @@ export class AddquizDialogComponent implements OnInit {
   radioChange(k){
     console.log(k);
     this.correctAnswer = k;
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 
