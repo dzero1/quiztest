@@ -1,0 +1,12 @@
+.button {
+  width: 25%;
+  height: 16em;
+  margin: 1em;
+  padding: 7%;
+  background-color: #ebeff2;
+  color: #565454;
+  border: 1px solid #ded6d6;
+  /deep/.mat-button-wrapper{
+    font-size: 1.5em;
+  }
+}

@@ -13,8 +13,10 @@ import { QuizreportComponent } from './quizreport/quizreport.component';
 import {AddquizDialogComponent} from './quizcreator/addquiz-dialog/addquiz-dialog.component';
 
 import { ChartsModule } from 'ng2-charts/ng2-charts';
+import { HeaderComponent } from './header/header.component';
 
 const appRoutes: Routes = [
+  {path: '' , component: HeaderComponent},
   {path: 'report' , component: QuizreportComponent},
 ];
 
@@ -23,6 +25,7 @@ const appRoutes: Routes = [
     AppComponent,
     QuizreportComponent,
     AddquizDialogComponent,
+    HeaderComponent,
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
