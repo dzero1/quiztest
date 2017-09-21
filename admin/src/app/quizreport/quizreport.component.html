@@ -1,3 +1,4 @@
+<div style="display:none;">{{count}}</div>
 <table width="100%">
   <tr>
     <td width="50%">
@@ -26,8 +27,8 @@
           </md-card-title>
           <div  *ngFor="let data of records; let i=index">
               <md-card-content>
-                {{data.doc._id}}
-                {{data.doc.ansid}}
+                {{data._id}} answer is : 
+                {{data.ansid}}
               </md-card-content>
           </div>
       </md-card>

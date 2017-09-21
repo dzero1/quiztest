@@ -17,7 +17,8 @@ export class QuizreportComponent implements OnInit {
   public totCount=0;
   public totCorrect=0;
   public correctUsers=0;
-  // public correctans=0;
+  count :number=0;
+  public correctans=0;
   public goalChartData:Array<any> = [
       {data: [this.countans1/this.totCount, this.countans2/this.totCount, this.countans3/this.totCount, this.countans4/this.totCount], label: 'Series A'}
     ];
@@ -41,31 +42,51 @@ export class QuizreportComponent implements OnInit {
         if(data.rows[i]._id=="answer" || data.rows[i]._id=="questions"){
           continue;
         }else{
-          this.records.push(data.rows[i]);
-          console.log(data.rows[i]);
+          this.records.push(data.rows[i].doc);
+          console.log(data.rows[i].doc);
         }
       }
       this.calcSum();
         this.pdb.get("questions").then(data=>{
         let qdata:any = data;
         for (let i = 0; i < qdata.question.length; i++) {
-          // this.correctans = qdata.question[i].correct;
+          this.correctans = qdata.question[i].correct;
           console.log("Correct ans is" + qdata.question[i].correct);
-          this.countCorrectUsers(qdata.question[i].correct);
+          this.countCorrectUsers(this.correctans);
         }
       });
     })
 
     
+    setInterval(()=>{
+          this.count++;
+          if (this.count > 10000) this.count = 0;
+    }, 1000)
 
     this.pdb.getChangeListener().subscribe(data => {
-            for (let i = 0; i < data.change.docs.length; i++) {
-              if(data.change.docs[i]._id != "answer" || data.change.docs[i]._id != "questions"){
-                console.log("Docs count : " + data.change.docs[i]._id);
-                this.records.push(data.change.docs[i]);
+            // for (let i = 0; i < data.change.docs.length; i++) {
+            //   if(data.change.docs[i]._id != "answer" || data.change.docs[i]._id != "questions"){
+            //     console.log("Docs count : " + data.change.docs[i]._id);
+            //     this.records.push(data.change.docs[i]);
+            //   }
+            // }
+            this.records = [];
+            this.pdb.fetch().then(data=>{
+              console.log(data);
+              for (let i = 0; i < data.rows.length; i++) {
+                console.log("documentasasasasa"+i);
+                if(data.rows[i]._id=="answer" || data.rows[i]._id=="questions"){
+                  continue;
+                }else{
+                  this.records.push(data.rows[i].doc);
+                  console.log(data.rows[i].doc);
+                }
               }
-            }
+              console.log(this.records);
             this.calcSum();
+            this.countCorrectUsers(this.correctans);
+            });
+            
     });
    
   }
@@ -84,28 +105,12 @@ export class QuizreportComponent implements OnInit {
   };
   public goalChartColors:Array<any> = [
       { // Goal 1
-          backgroundColor: 'rgba(128,173,246, .5)',
-          borderColor: 'rgba(24,106,238, .5)',
-          pointBackgroundColor: 'rgba(148,159,177,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      },
-      { // Goal 2
-          backgroundColor: 'rgba(190, 128, 246, .5)',
-          borderColor: 'rgba(143, 0, 189, .5)',
-          pointBackgroundColor: 'rgba(148,159,177,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-      },
-      { // Goal 3
-          backgroundColor: 'rgba(84, 241, 89, .5)',
-          borderColor: 'rgba(0, 169, 5, .5)',
-          pointBackgroundColor: 'rgba(148,159,177,1)',
-          pointBorderColor: '#fff',
-          pointHoverBackgroundColor: '#fff',
-          pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+          backgroundColor: [
+              'rgba(255, 99, 132, 1.0)',
+              'rgba(54, 162, 235, 1.0)',
+              'rgba(255, 206, 86, 1.0)',
+              'rgba(153, 102, 255, 1.0)',
+            ],
       }
   ];
   public goalChartLegend:boolean = true;
@@ -146,17 +151,17 @@ export class QuizreportComponent implements OnInit {
     this.countans4=0;
     console.log("in");
     for (let i = 0; i < this.records.length; i++) {
-      console.log("I is " + this.records[i].doc._id);
-      if(this.records[i].doc.ansid == 1){
+      console.log("I is " + this.records[i]._id);
+      if(this.records[i].ansid == 1){
         this.countans1++;
       }
-      else if(this.records[i].doc.ansid == 2){
+      else if(this.records[i].ansid == 2){
         this.countans2++;
       }
-      else if(this.records[i].doc.ansid == 3){
+      else if(this.records[i].ansid == 3){
         this.countans3++;
       }
-      else if(this.records[i].doc.ansid == 4){
+      else if(this.records[i].ansid == 4){
         this.countans4++;
       }
     }
@@ -167,9 +172,11 @@ export class QuizreportComponent implements OnInit {
   }
 
   public countCorrectUsers(correctans){
+    this.totCorrect = 0;
+    this.correctUsers = 0;
     for (let i = 0; i < this.records.length; i++) {
       console.log("Correct"+i);
-      if(correctans == this.records[i].doc.ansid){
+      if(correctans == this.records[i].ansid){
         this.correctUsers++;
       }
     }
